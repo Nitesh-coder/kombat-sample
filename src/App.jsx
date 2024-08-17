@@ -1,40 +1,23 @@
-import { useContext, useState } from 'react'
-import MenuBar from './components/MenuBar'
-import Collection from './components/Collection'
-import Special from './components/Special'
-import Skin from './components/Skin'
-import Achivement from './components/Achivement'
-import { MenuContext } from './Context/MenuContext'
+
+import { Nav } from './components/Nav'
+import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Stats from './components/Stats'
+import { Home } from './components/Home'
 
 
 function App() {
-  const {showCollect, setShowCollect, showSpecial, setShowSpecial, showSkin, setShowSkin, showAchvement, setShowAchivement} = useContext(MenuContext)
+  
 
   return (
-    <>
-      <div className=' text-red-200 bg-blue-800 text-center shadow-lg font-bold text-lg py-3'>My App</div>
-
-      <MenuBar />
-      <div className=' flex justify-center mt-1'>
-
-        <div className={`transition-opacity duration-200 ${showCollect ? 'opacity-100' : 'opacity-0'}`}>
-          {showCollect && <Collection />}
-        </div>
-
-        <div className={`transition-opacity duration-200 ${showSpecial ? 'opacity-100' : 'opacity-0'}`}>
-          {showSpecial && <Special />}
-        </div>
-
-        <div className={`transition-opacity duration-200 ${showSkin ? 'opacity-100' : 'opacity-0'}`}>
-          {showSkin && <Skin />}
-        </div>
-
-        <div className={`transition-opacity duration-200 ${showAchvement ? 'opacity-100' : 'opacity-0'}`}>
-          {showAchvement && <Achivement />}
-        </div>
-
-      </div>
-    </>
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path='/'>
+        <Route index element={<Home />} />
+          <Route path='stats' element={<Stats />} />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
